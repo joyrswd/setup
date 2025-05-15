@@ -14,16 +14,12 @@ sudo apt install -y \
     lsb-release \
     git
 
-echo "=== Git config setup ==="
-read -p "Enter your Git user name: " git_username
-read -p "Enter your Git email: " git_email
-
-git config --global user.name "$git_username"
-git config --global user.email "$git_email"
-
-echo "Git config set to:"
-git config --global user.name
-git config --global user.email
+if [ ! -f ~/.ssh/id_ed25519 ]; then
+    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N ""
+    echo "SSH key created at ~/.ssh/id_ed25519"
+else
+    echo "SSH key already exists at ~/.ssh/id_ed25519 — skipping generation."
+fi
 
 echo "=== Adding Docker's official GPG key ==="
 sudo mkdir -p /etc/apt/keyrings
