@@ -14,11 +14,9 @@ sudo apt install -y \
     lsb-release \
     git
 
-if [ ! -f ~/.ssh/id_ed25519 ]; then
-    ssh-keygen -t ed25519 -f ~/.ssh/id_ed25519 -N ""
-    echo "SSH key created at ~/.ssh/id_ed25519"
-else
-    echo "SSH key already exists at ~/.ssh/id_ed25519 — skipping generation."
+if [ ! -d ~/.ssh ]; then
+    mkdir ~/.ssh
+    chmod 700 ~/.ssh
 fi
 
 echo "=== Adding Docker's official GPG key ==="
